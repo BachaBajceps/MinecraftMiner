@@ -1,0 +1,2 @@
+# MinecraftMiner
+AutoMiner do Minecrafta!
