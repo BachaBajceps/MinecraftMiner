@@ -1,6 +1,6 @@
 # MinecraftMiner
 ###### AutoMiner do Minecrafta!
-* Instrukcja Obsługi: *
+*Instrukcja Obsługi:*
 1. Ustaw opcje
 2. kliknij Pos1, i kliknij w sprzedaż w sklepie
 3. kliknij Pos2, i kliknij w Sprzedaj Wszystko
