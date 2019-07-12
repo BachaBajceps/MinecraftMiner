@@ -1,5 +1,5 @@
 # MinecraftMiner
-###AutoMiner do Minecrafta!
+######AutoMiner do Minecrafta!
 Instrukcja Obsługi:
 1. Ustaw opcje
 2. kliknij Pos1, i klinij w sprzedaż w sklepie
