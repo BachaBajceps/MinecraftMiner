@@ -6,6 +6,6 @@ Instrukcja Obsługi:
 3. kliknij Pos2, i klinij w Sprzedaj Wszystko
 
 Planowane Funkcje:
--kopanie na wielu kontach jednocześnie
--więcej trybów ruchu(np. lewo-prawo)
--zapisywanie ustawień
+- kopanie na wielu kontach jednocześnie
+- więcej trybów ruchu(np. lewo-prawo)
+- zapisywanie ustawień
