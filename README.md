@@ -16,3 +16,4 @@
 **Planowane Funkcje:**
 - kopanie na wielu kontach jednocześnie
 - zapisywanie ustawień
+- sekcja pomocy w programie
