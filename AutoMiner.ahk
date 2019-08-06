@@ -1,73 +1,124 @@
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #SingleInstance force ;
-    SetWorkingDir %A_ScriptDir%  ;
-SendMode Input ;
+#InstallMouseHook ;
+#InstallKeybdHook ;
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetTitleMatchMode, 2 ;
 
-MakeCobbleX = 0 ;
-Sell = 0 ;
-Bloki = 0 ;
 Emerald = 0 ;
-Repair = 0 ;
 
 RotateSpeed = 0 ;
 
-TimerCobbleX = 0 ;
-TimerSell = 0 ;
-TimerBloki = 0 ;
-TimerRepair = 0 ;
+Komenda1Timer = 0 ;
+Komenda2Timer = 0 ;
+Komenda3Timer = 0 ;
+Komenda4Timer = 0 ;
+Komenda5Timer = 0 ;
+Komenda6Timer = 0 ;
+Komenda7Timer = 0 ;
 
-SellTime = 10 ;
-CobbleXTime = 10 ;
-RepairTime = 10 ;
-BlokiTime = 10 ;
+Komenda1Time = 0 ;
+Komenda2Time = 0 ;
+Komenda3Time = 0 ;
+Komenda4Time = 0 ;
+Komenda5Time = 0 ;
+Komenda6Time = 0 ;
+Komenda7Time = 0 ;
+
+Komenda1 = 0 ;
+Komenda2 = 0 ;
+Komenda3 = 0 ;
+Komenda4 = 0 ;
+Komenda5 = 0 ;
+Komenda6 = 0 ;
+Komenda7 = 0 ;
+
+Komenda1TEXT = 0 ;
+Komenda2TEXT = 0 ;
+Komenda3TEXT = 0 ;
+Komenda4TEXT = 0 ;
+Komenda5TEXT = 0 ;
+Komenda6TEXT = 0 ;
+Komenda7TEXT = 0 ;
 
 Tryb = "Obracanie" ;
 
 ; ---GUI---
 Gui,+AlwaysOnTop ;
 Gui, +ToolWindow ;
-Gui, Add, Checkbox, vMakeCobbleX gSubmitAll, Tworzenie Cobblex ;
-Gui, Add, Checkbox, vSell gSubmitAll, Sprzedawnie ;
-Gui, Add, Checkbox, vBloki gSubmitAll, Tworzenie Blokow ;
-Gui, Add, Checkbox, vRepair gSubmitAll, Heal/repair ;
+
+Gui, Add, Tab3,, Generalne|Komendy
+
+; ---Generalne---
 Gui, Add, Checkbox, vEmerald gSubmitAll, Wyrzucanie Emeradow ;
 Gui, Add, Slider, gSubmitAll vRotateSpeed Range-20-20 w170 , 0 ;
 Gui, Add, Text, +Center w170 ca1a1a1, Predkosc Obrotu ;
 
 Gui, Add, Text,w70 , Tryb Kopania: ;
-Gui, Add, DropDownList, Choose1 vTryb w85 yp x80 gSubmitAll , Obracanie|Lewo-Prawo|Kwadrat ;
+Gui, Add, DropDownList, Choose1 vTryb w85 yp x100 gSubmitAll , Obracanie|Lewo-Prawo|Kwadrat ;
 
-Gui, Add, Text,x10 vID, Pauza Miedzy: ;
-Gui, Add, Text, vSellTEXT, Sprzedaniem: ;
-Gui, Add, Edit, vSellTime yp x78 w25 gSubmitAll, 10 ;
-Gui, Add, Text, vCobbleXTEXT xs, Cobblex: ;
-Gui, Add, Edit, vCobbleXTime yp x78 w25 gSubmitAll, 10 ;
-Gui, Add, Text, vRepairTEXT xs, Repair: ;
-Gui, Add, Edit, vRepairTime yp x78 w25 gSubmitAll, 10 ;
-Gui, Add, Text, vBlokiTEXT xs, Bloki: ;
-Gui, Add, Edit, vBlokiTime yp x78 w25 gSubmitAll, 10 ;
+Gui, Add, Text, x30 y150 vSzerokoscTEXT, Szerokosc: ;
+Gui, Add, Edit, vSzerokosc yp x100 w25 gSubmitAll, 10 ;
+Gui, Add, Text, x30 y175 vDlugoscTEXT, Dlugosc: ;
+Gui, Add, Edit, vDlugosc yp x100 w25 gSubmitAll, 10 ;
 
-Gui, Add, Text, xs vSzerokoscTEXT, Szerokosc: ;
-Gui, Add, Edit, vSzerokosc yp x78 w25 gSubmitAll, 10 ;
-Gui, Add, Text, xs vDlugoscTEXT, Dlugosc: ;
-Gui, Add, Edit, vDlugosc yp x78 w25 gSubmitAll, 10 ;
+Gui, Add, Button, x20 w180 y210 gPos1, Pozycja1 ;
 
-Gui, Add, Button, x0 w200 gPos1, Pozycja1 ;
+Gui, Add, Button, x20 y250 w90 gStart, Start ;
+Gui, Add, Button, yp x110 w90 gStop, Stop ;
 
-Gui, Add, Button, x0 w100 gStart, Start ;
-Gui, Add, Button, yp x100 w100 gStop, Stop ;
+Gui, Add, Button, x20 y275 w90 gSave, Zapisz ;
+Gui, Add, Button, yp x110 w90 gLoad, Wczytaj ;
 
-Gui, Add, Button, x10 y470 w180 gUpdate, Aktualizuj ;
-Gui, Add, Button, x5 y520 w40 gHelp, Pomoc ;
+Gui, Add, Button, x20 y305 w180 gUpdate, Aktualizuj ;
+Gui, Add, Button, x15 y340 w40 gHelp, Pomoc ;
 
 Gui, Font, s7 ;
 Gui, Add, Text, ca1a1a1 +Right w180 , Pajacuwa AutoMiner ;
 Gui, Add, Text, ca1a1a1 +Right w180 , Autor Bacha_Bajceps ;
 Gui, Font, s9 ;
 
-Gui, Show, xCenter yCenter w200 h600 , Pajacuwa  AutoMiner ;
+; ----Komendy-----
+Gui, Tab, Komendy ;
+Gui, Font, s7 ;
+Gui, Add, Text, x20 y35 ca1a1a1, Wl? ;
+Gui, Add, Text, x70 y35 ca1a1a1, Komenda ;
+Gui, Add, Text, x170 y35 ca1a1a1, Czas ;
 
-; id minecraft?w
+Gui, Add, Checkbox, x20 y55 vKomenda1 gSubmitAll
+Gui, Add, Edit, yp x50 -Wrap h15 w100 vKomenda1TEXT gSubmitAll, cobblex ;
+Gui, Add, Edit, yp x160 -Wrap Number h15 w40 vKomenda1Time gSubmitAll, %Komenda1Time% ;
+
+Gui, Add, Checkbox, x20 y75 vKomenda2 gSubmitAll
+Gui, Add, Edit, yp x50 -Wrap h15 w100 vKomenda2TEXT gSubmitAll, sellall ;
+Gui, Add, Edit, yp x160 -Wrap Number h15 w40 vKomenda2Time gSubmitAll, %Komenda2Time% ;
+
+Gui, Add, Checkbox, x20 y95 vKomenda3 gSubmitAll
+Gui, Add, Edit, yp x50 -Wrap h15 w100 vKomenda3TEXT  gSubmitAll, ;
+Gui, Add, Edit, yp x160 -Wrap Number h15 w40 vKomenda3Time gSubmitAll, %Komenda3Time% ;
+
+Gui, Add, Checkbox, x20 y115 vKomenda4 gSubmitAll
+Gui, Add, Edit, yp x50 -Wrap h15 w100 vKomenda4TEXT  gSubmitAll, ;
+Gui, Add, Edit, yp x160 -Wrap Number h15 w40 vKomenda4Time gSubmitAll, %Komenda4Time% ;
+
+Gui, Add, Checkbox, x20 y135 vKomenda5 gSubmitAll
+Gui, Add, Edit, yp x50 -Wrap h15 w100 vKomenda5TEXT gSubmitAll, ;
+Gui, Add, Edit, yp x160 -Wrap Number h15 w40 vKomenda5Time gSubmitAll, %Komenda5Time% ;
+
+Gui, Add, Checkbox, x20 y155 vKomenda6 gSubmitAll
+Gui, Add, Edit, yp x50 -Wrap h15 w100 vKomenda6TEXT  gSubmitAll, ;
+Gui, Add, Edit, yp x160 -Wrap Number h15 w40 vKomenda6Time gSubmitAll, %Komenda6Time% ;
+
+Gui, Add, Checkbox, x20 y175 vKomenda7 gSubmitAll
+Gui, Add, Edit, yp x50 -Wrap h15 w100 vKomenda7TEXT  gSubmitAll, ;
+Gui, Add, Edit, yp x160 -Wrap Number h15 w40 vKomenda7Time gSubmitAll, %Komenda7Time% ;
+
+
+
+Gui, Show, xCenter yCenter AutoSize , Pajacuwa  AutoMiner ;
+
+; id minecraftow
 Winget, id, list, Minecraft
 
 Goto, SubmitAll ;
@@ -80,37 +131,55 @@ Start:
     Click down ;
     While, Stopped != 1 ;
     {
-        ; Timery
-        if(TimerCobbleX > (CobbleXTime*100) && MakeCobbleX = 1)
+        ; ---Przekierowania---
+        
+        if(Komenda1Timer > (Komenda1Time*100) && Komenda1 = 1)
         {
-            Goto, Cobblex ;
+            Goto, Komenda1 ;
         }
         
-        if(TimerSell > (SellTime*100) && Sell = 1)
+        if(Komenda2Timer > (Komenda2Time*100) && Komenda2 = 1)
         {
-            Goto, Sell ;
+            Goto, Komenda2 ;
         }
         
-        if(TimerRepair > (RepairTime*100) && Repair = 1)
+        if(Komenda3Timer > (Komenda3Time*100) && Komenda3 = 1)
         {
-            Goto, Repair ;
+            Goto, Komenda3 ;
         }
         
-        if(TimerBloki > (BlokiTime*100) && Bloki = 1)
+        if(Komenda4Timer > (Komenda4Time*100) && Komenda4 = 1)
         {
-            Goto, Bloki ;
+            Goto, Komenda4 ;
         }
         
+        if(Komenda5Timer > (Komenda5Time*100) && Komenda5 = 1)
+        {
+            Goto, Komenda5 ;
+        }
+        
+        if(Komenda6Timer > (Komenda6Time*100) && Komenda6 = 1)
+        {
+            Goto, Komenda6 ;
+        }
+        
+        if(Komenda7Timer > (Komenda7Time*100) && Komenda7 = 1)
+        {
+            Goto, Komenda7 ;
+        }
         
         ; Tryby Kopania
         if (Tryb = "Obracanie") ; Tryb Obracanie
         {
             MouseMove, RotateSpeed,0, 100, R ;
             Sleep, 10 ;
-            TimerCobbleX++ ;
-            TimerSell++ ;
-            TimerRepair++ ;
-            TimerBloki++ ;
+            Komenda1Timer++ ;
+            Komenda2Timer++ ;
+            Komenda3Timer++ ;
+            Komenda4Timer++ ;
+            Komenda5Timer++ ;
+            Komenda6Timer++ ;
+            Komenda7Timer++ ;
         }
         
         if (Tryb = "Lewo-Prawo") ; Tryb Lewo-Prawo
@@ -118,16 +187,19 @@ Start:
             Click down ;
             Send, {a down} ; 
             Sleep, Szerokosc*100 ;
-            Send, {a up}; ;d
+            Send, {a up} ; 
             Sleep 50 ;
             Send, {d down} ; 
             Sleep, Szerokosc*100 ;
             Send, {d up} ; 
             Sleep 50 ;
-            TimerCobbleX += 20 ;
-            TimerSell += 20 ;
-            TimerRepair += 20 ;
-            TimerBloki += 20 ;
+            Komenda1Timer += 20 ;
+            Komenda2Timer += 20 ;
+            Komenda3Timer += 20 ;
+            Komenda4Timer += 20 ;
+            Komenda5Timer += 20 ;
+            Komenda6Timer += 20 ;
+            Komenda7Timer += 20 ;
         }
         
         if (Tryb = "Kwadrat") ; Tryb Kwadrat
@@ -149,10 +221,13 @@ Start:
             Sleep, Dlugosc*100 ;
             Send, {s up} ;
             Sleep 50 ;
-            TimerCobbleX += 40 ;
-            TimerSell += 40 ;
-            TimerRepair += 40 ;
-            TimerBloki += 40 ;
+            Komenda1Timer += 40 ;
+            Komenda2Timer += 40 ;
+            Komenda3Timer += 40 ;
+            Komenda4Timer += 40 ;
+            Komenda5Timer += 40 ;
+            Komenda6Timer += 40 ;
+            Komenda7Timer += 40 ;
         }
     }
     
@@ -165,8 +240,7 @@ Pos1:
     MsgBox, , Pozycja1, Pozycja pierwsza zostala zapisana %Pos1x% %Pos1y%, 2 ;
 return
 
-
-Sell:
+Komenda1:
     if (Stopped != 1)
     {
         if(Emerald = 1)
@@ -194,58 +268,114 @@ Sell:
                 }
             }
         }
-        Sleep, 200 ;
         Stopped = 1;
         Send, {Raw}/ ;
         Sleep 100 ;
-        Send, {Raw}sellall ;
-        Sleep 300 ;
-        Send, {Enter} ;
-        Sleep 400 ;
-        TimerSell = 0 ;
-        Goto, Start ;
-    }
-return
-
-Cobblex:
-    if (Stopped != 1)
-    {
-        Stopped = 1;
-        Send, {Raw}/ ;
-        Sleep 100 ;
-        Send, {Raw}Cobblex ;
+        Send, {Raw}%Komenda1TEXT% ;
         Sleep 300 ;
         Send, {Enter} ;
         Sleep 500 ;
-        TimerCobbleX = 0 ;
+        Komenda1Timer = 0 ;
         Sleep 100 ;
         Goto, Start ;
     }
 return
 
-Repair:
+Komenda2:
     if (Stopped != 1)
     {
         Stopped = 1;
         Send, {Raw}/ ;
         Sleep 100 ;
-        Send, {Raw}Repair ;
+        Send, {Raw}%Komenda2TEXT% ;
         Sleep 300 ;
         Send, {Enter} ;
         Sleep 500 ;
-        TimerRepair = 0 ;
-        Sleep 300 ;
-        Send, {Raw}/ ;
-        Sleep 100 ;
-        Send, {Raw}heal ;
-        Sleep 300 ;
-        Send, {Enter} ;
-        Sleep 500 ;
-        TimerRepair = 0 ;
+        Komenda2Timer = 0 ;
         Sleep 100 ;
         Goto, Start ;
     }
 return
+
+Komenda3:
+    if (Stopped != 1)
+    {
+        Stopped = 1;
+        Send, {Raw}/ ;
+        Sleep 100 ;
+        Send, {Raw}%Komenda3TEXT% ;
+        Sleep 300 ;
+        Send, {Enter} ;
+        Sleep 500 ;
+        Komenda3Timer = 0 ;
+        Sleep 100 ;
+        Goto, Start ;
+    }
+return
+
+Komenda4:
+    if (Stopped != 1)
+    {
+        Stopped = 1;
+        Send, {Raw}/ ;
+        Sleep 100 ;
+        Send, {Raw}%Komenda4TEXT% ;
+        Sleep 300 ;
+        Send, {Enter} ;
+        Sleep 500 ;
+        Komenda4Timer = 0 ;
+        Sleep 100 ;
+        Goto, Start ;
+    }
+return
+
+Komenda5:
+    if (Stopped != 1)
+    {
+        Stopped = 1;
+        Send, {Raw}/ ;
+        Sleep 100 ;
+        Send, {Raw}%Komenda5TEXT% ;
+        Sleep 300 ;
+        Send, {Enter} ;
+        Sleep 500 ;
+        Komenda5Timer = 0 ;
+        Sleep 100 ;
+        Goto, Start ;
+    }
+return
+
+Komenda6:
+    if (Stopped != 1)
+    {
+        Stopped = 1;
+        Send, {Raw}/ ;
+        Sleep 100 ;
+        Send, {Raw}%Komenda6TEXT% ;
+        Sleep 300 ;
+        Send, {Enter} ;
+        Sleep 500 ;
+        Komenda6Timer = 0 ;
+        Sleep 100 ;
+        Goto, Start ;
+    }
+return
+
+Komenda7:
+    if (Stopped != 1)
+    {
+        Stopped = 1;
+        Send, {Raw}/ ;
+        Sleep 100 ;
+        Send, {Raw}%Komenda7TEXT% ;
+        Sleep 300 ;
+        Send, {Enter} ;
+        Sleep 500 ;
+        Komenda7Timer = 0 ;
+        Sleep 100 ;
+        Goto, Start ;
+    }
+return 
 
 Bloki:
     if (Stopped != 1)
@@ -344,6 +474,39 @@ Help:
     Gui, 2:Show, xCenter yCenter w200 h300, Pomoc ;
 return
     
+Save:
+FileDelete Config.txt ;
+FileAppend,  ; The comma is required in this case.
+(
+    %Komenda1Time%
+    %Komenda2Time%
+    %Komenda3Time%
+    %Komenda4Time%
+    %Komenda5Time%
+    %Komenda6Time%
+    %Komenda7Time%
+), Config.txt
+return
+
+Load:
+FileReadLine, Komenda1Time, Config.txt, 1 ;
+FileReadLine, Komenda2Time, Config.txt, 2 ;
+FileReadLine, Komenda3Time, Config.txt, 3 ;
+FileReadLine, Komenda4Time, Config.txt, 4 ;
+FileReadLine, Komenda5Time, Config.txt, 5 ;
+FileReadLine, Komenda6Time, Config.txt, 6 ;
+FileReadLine, Komenda7Time, Config.txt, 7 ;
+
+GuiControl,, Komenda1Time, %Komenda1Time% ;
+GuiControl,, Komenda2Time, %Komenda2Time% ;
+GuiControl,, Komenda3Time, %Komenda3Time% ;
+GuiControl,, Komenda4Time, %Komenda4Time% ;
+GuiControl,, Komenda5Time, %Komenda5Time% ;
+GuiControl,, Komenda6Time, %Komenda6Time% ;
+GuiControl,, Komenda7Time, %Komenda7Time% ;
+
+MsgBox, , Zaladowano, Ustawienia wczytane!, 1
+return
 
 F7::
     Goto, Start ;
