@@ -34,13 +34,13 @@ Komenda5 = 0 ;
 Komenda6 = 0 ;
 Komenda7 = 0 ;
 
-Komenda1TEXT = 0 ;
-Komenda2TEXT = 0 ;
-Komenda3TEXT = 0 ;
-Komenda4TEXT = 0 ;
-Komenda5TEXT = 0 ;
-Komenda6TEXT = 0 ;
-Komenda7TEXT = 0 ;
+Komenda1TEXT = null ;
+Komenda2TEXT = null ;
+Komenda3TEXT = null ;
+Komenda4TEXT = null ;
+Komenda5TEXT = null ;
+Komenda6TEXT = null ;
+Komenda7TEXT = null ;
 
 Tryb = "Obracanie" ;
 
@@ -113,8 +113,6 @@ Gui, Add, Edit, yp x160 -Wrap Number h15 w40 vKomenda6Time gSubmitAll, %Komenda6
 Gui, Add, Checkbox, x20 y175 vKomenda7 gSubmitAll
 Gui, Add, Edit, yp x50 -Wrap h15 w100 vKomenda7TEXT  gSubmitAll, ;
 Gui, Add, Edit, yp x160 -Wrap Number h15 w40 vKomenda7Time gSubmitAll, %Komenda7Time% ;
-
-
 
 Gui, Show, xCenter yCenter AutoSize , Pajacuwa  AutoMiner ;
 
@@ -473,39 +471,100 @@ Help:
     Gui, 2:Add, Text,, F9 - Wyjscie ;
     Gui, 2:Show, xCenter yCenter w200 h300, Pomoc ;
 return
-    
+
 Save:
-FileDelete Config.txt ;
-FileAppend,  ; The comma is required in this case.
-(
-    %Komenda1Time%
-    %Komenda2Time%
-    %Komenda3Time%
-    %Komenda4Time%
-    %Komenda5Time%
-    %Komenda6Time%
-    %Komenda7Time%
-), Config.txt
+    FileDelete Config.txt ;
+    FileAppend,  ; The comma is required in this case.
+    (
+%Komenda1Time%
+%Komenda2Time%
+%Komenda3Time%
+%Komenda4Time%
+%Komenda5Time%
+%Komenda6Time%
+%Komenda7Time%
+%Komenda1%
+%Komenda2%
+%Komenda3%
+%Komenda4%
+%Komenda5%
+%Komenda6%
+%Komenda7%
+%Komenda1TEXT%
+%Komenda2TEXT%
+%Komenda3TEXT%
+%Komenda4TEXT%
+%Komenda5TEXT%
+%Komenda6TEXT%
+%Komenda7TEXT%
+%Szerokosc%
+%Dlugosc%
+%RotateSpeed%
+%Emerald%
+    ), Config.txt
 return
 
 Load:
-FileReadLine, Komenda1Time, Config.txt, 1 ;
-FileReadLine, Komenda2Time, Config.txt, 2 ;
-FileReadLine, Komenda3Time, Config.txt, 3 ;
-FileReadLine, Komenda4Time, Config.txt, 4 ;
-FileReadLine, Komenda5Time, Config.txt, 5 ;
-FileReadLine, Komenda6Time, Config.txt, 6 ;
-FileReadLine, Komenda7Time, Config.txt, 7 ;
+    FileReadLine, Komenda1Time, Config.txt, 1 ;
+    FileReadLine, Komenda2Time, Config.txt, 2 ;
+    FileReadLine, Komenda3Time, Config.txt, 3 ;
+    FileReadLine, Komenda4Time, Config.txt, 4 ;
+    FileReadLine, Komenda5Time, Config.txt, 5 ;
+    FileReadLine, Komenda6Time, Config.txt, 6 ;
+    FileReadLine, Komenda7Time, Config.txt, 7 ;
+    
+    FileReadLine, Komenda1, Config.txt, 8 ;
+    FileReadLine, Komenda2, Config.txt, 9 ;
+    FileReadLine, Komenda3, Config.txt, 10 ;
+    FileReadLine, Komenda4, Config.txt, 11 ;
+    FileReadLine, Komenda5, Config.txt, 12 ;
+    FileReadLine, Komenda6, Config.txt, 13 ;
+    FileReadLine, Komenda7, Config.txt, 14 ;
 
-GuiControl,, Komenda1Time, %Komenda1Time% ;
-GuiControl,, Komenda2Time, %Komenda2Time% ;
-GuiControl,, Komenda3Time, %Komenda3Time% ;
-GuiControl,, Komenda4Time, %Komenda4Time% ;
-GuiControl,, Komenda5Time, %Komenda5Time% ;
-GuiControl,, Komenda6Time, %Komenda6Time% ;
-GuiControl,, Komenda7Time, %Komenda7Time% ;
+    FileReadLine, Komenda1TEXT, Config.txt, 15 ;
+    FileReadLine, Komenda2TEXT, Config.txt, 16 ;
+    FileReadLine, Komenda3TEXT, Config.txt, 17 ;
+    FileReadLine, Komenda4TEXT, Config.txt, 18 ;
+    FileReadLine, Komenda5TEXT, Config.txt, 19 ;
+    FileReadLine, Komenda6TEXT, Config.txt, 20 ;
+    FileReadLine, Komenda7TEXT, Config.txt, 21 ;
 
-MsgBox, , Zaladowano, Ustawienia wczytane!, 1
+    FileReadLine, Szerokosc, Config.txt, 22 ;
+    FileReadLine, Dlugosc, Config.txt, 23 ;
+    FileReadLine, RotateSpeed, Config.txt, 24 ;
+    FileReadLine, Emerald, Config.txt, 25 ;
+    
+
+    GuiControl,, Komenda1Time, %Komenda1Time% ;
+    GuiControl,, Komenda2Time, %Komenda2Time% ;
+    GuiControl,, Komenda3Time, %Komenda3Time% ;
+    GuiControl,, Komenda4Time, %Komenda4Time% ;
+    GuiControl,, Komenda5Time, %Komenda5Time% ;
+    GuiControl,, Komenda6Time, %Komenda6Time% ;
+    GuiControl,, Komenda7Time, %Komenda7Time% ;
+
+    GuiControl,, Komenda1, %Komenda1% ;
+    GuiControl,, Komenda2, %Komenda2% ;
+    GuiControl,, Komenda3, %Komenda3% ;
+    GuiControl,, Komenda4, %Komenda4% ;
+    GuiControl,, Komenda5, %Komenda5% ;
+    GuiControl,, Komenda6, %Komenda6% ;
+    GuiControl,, Komenda7, %Komenda7% ;
+
+    GuiControl,, Komenda1TEXT, %Komenda1TEXT% ;
+    GuiControl,, Komenda2TEXT, %Komenda2TEXT% ;
+    GuiControl,, Komenda3TEXT, %Komenda3TEXT% ;
+    GuiControl,, Komenda4TEXT, %Komenda4TEXT% ;
+    GuiControl,, Komenda5TEXT, %Komenda5TEXT% ;
+    GuiControl,, Komenda6TEXT, %Komenda6TEXT% ;
+    GuiControl,, Komenda7TEXT, %Komenda7TEXT% ;
+
+    GuiControl,, Szerokosc, %Szerokosc% ;
+    GuiControl,, Dlugosc, %Dlugosc% ;
+    GuiControl,, RotateSpeed, %RotateSpeed% ;
+    GuiControl,, Emerald, %Emerald% ;
+    
+    MsgBox, , Wczytano!, Ustawienia wczytane!, 1
 return
 
 F7::
@@ -524,7 +583,8 @@ F8::
 return
 
 GuiClose:
-ExitApp
-
-F9::ExitApp
-
+    ExitApp
+    
+    F9::ExitApp
+    
+    
