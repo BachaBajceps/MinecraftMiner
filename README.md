@@ -1,4 +1,4 @@
-# (PORZUCONE) MinecraftMiner
+# (⛔️PORZUCONE⛔️) MinecraftMiner
 ###### AutoMiner do Minecrafta!
 ###### Pisany na DragonSurvival.eu
 ### Funkcje ###
