@@ -1,0 +1,85 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Archivo", sans-serif;
+  background-color: rgb(231, 231, 231);
+}
+nav {
+  padding: 0.5rem;
+  background-color: rgb(255, 255, 255);
+}
+
+ul.nav-horizontal {
+  font-size: 1.2rem;
+}
+.nav-horizontal li {
+  list-style: none;
+  display: inline;
+  margin-right: 1.5em;
+}
+.nav-link {
+  color: black;
+  text-decoration: none;
+  padding: 0.7rem;
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 200ms ease-in;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.img-home a {
+  pointer-events: none;
+  padding: 1.6rem;
+  background: url(/kilof.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#start-page {
+  display: flex;
+  height: 70vh;
+  padding-top: 1rem;
+}
+.description {
+  max-width: min(50ch, 50%);
+  min-width: 20ch;
+  padding: 1.4rem;
+}
+.description h2 {
+  margin-top: 30%;
+  text-transform: uppercase;
+}
+.img-desc {
+  min-width: 50px;
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+.img-desc img {
+  box-shadow: 0px 2px 10px rgb(0, 0, 0, 0.3);
+  height: 80%;
+}
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: rgb(177, 177, 177);
+  }
+  #start-page {
+    display: block;
+  }
+  .img-desc img {
+    height: auto;
+    width: 60vw;
+  }
+}
