@@ -1,14 +1,16 @@
 body {
   margin: 0px;
   padding: 0px;
-  font-family: "Archivo", sans-serif;
-  background-color: rgb(231, 231, 231);
+  font-family: "Open Sans", Arial, sans-serif;
+  background-color: rgb(255, 255, 255);
+  position: relative;
 }
 nav {
   padding: 0.5rem;
   background-color: rgb(255, 255, 255);
+  position: fixed;
+  width: 100%;
 }
-
 ul.nav-horizontal {
   font-size: 1.2rem;
 }
@@ -18,10 +20,13 @@ ul.nav-horizontal {
   margin-right: 1.5em;
 }
 .nav-link {
-  color: black;
+  color: rgb(22, 22, 22);
   text-decoration: none;
   padding: 0.7rem;
   position: relative;
+}
+.nav-link:hover {
+  color: black;
 }
 .nav-link::after {
   content: "";
@@ -42,44 +47,57 @@ ul.nav-horizontal {
 .img-home a {
   pointer-events: none;
   padding: 1.6rem;
-  background: url(/kilof.png);
+  background: url(kilof.png);
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 #start-page {
   display: flex;
-  height: 70vh;
-  padding-top: 1rem;
+  height: auto;
+  max-height: 60vh;
+  padding-top: 12rem;
+  padding-bottom: 8rem;
+
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+#start-page::after {
+  content: "";
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background: url(main-tlo.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .description {
-  max-width: min(50ch, 50%);
   min-width: 20ch;
   padding: 1.4rem;
+  flex-shrink: 1;
+  flex-basis: min(50ch, 50%);
 }
 .description h2 {
-  margin-top: 30%;
   text-transform: uppercase;
 }
 .img-desc {
-  min-width: 50px;
+  height: 70%;
+  min-width: 100px;
   display: grid;
   place-items: center;
-  width: 100%;
+  max-width: 50%;
+  flex-grow: 1;
 }
 .img-desc img {
   box-shadow: 0px 2px 10px rgb(0, 0, 0, 0.3);
-  height: 80%;
+  height: 100%;
 }
-@media only screen and (max-width: 600px) {
-  body {
-    background-color: rgb(177, 177, 177);
-  }
-  #start-page {
-    display: block;
-  }
-  .img-desc img {
-    height: auto;
-    width: 60vw;
-  }
+#functions {
+  background-color: rgb(204, 204, 204);
 }
