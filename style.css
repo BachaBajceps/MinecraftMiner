@@ -47,7 +47,7 @@ ul.nav-horizontal {
 .img-home a {
   pointer-events: none;
   padding: 1.6rem;
-  background: url(kilof.png);
+  background: url(img/kilof.png);
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -72,7 +72,7 @@ ul.nav-horizontal {
   right: 0;
   position: absolute;
   z-index: -1;
-  background: url(main-tlo.webp);
+  background: url(img/main-tlo.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
