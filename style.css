@@ -20,16 +20,19 @@ body {
 nav {
   padding: 0.5rem;
   background-color: rgb(255, 255, 255);
-  position: fixed;
   width: 100%;
 }
 ul.nav-horizontal {
+  margin-top: 0px;
   font-size: 1.2rem;
 }
 .nav-horizontal li {
   list-style: none;
   display: inline;
   margin-right: 1.5em;
+}
+.nav-horizontal li img {
+  height: 2em;
 }
 .nav-link {
   color: rgb(39, 39, 39);
@@ -58,20 +61,13 @@ ul.nav-horizontal {
   transform: scaleX(1);
   transform-origin: left;
 }
-.img-home a {
-  pointer-events: none;
-  padding: 1.6rem;
-  background: url(img/kilof.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+
 #start-page {
   display: flex;
   height: auto;
   max-height: fit-content;
   width: 100%;
-  padding-top: 10rem;
+  padding-top: 4rem;
   padding-bottom: 8rem;
   flex-wrap: wrap;
   align-items: center;
@@ -97,11 +93,36 @@ ul.nav-horizontal {
   max-width: 45ch;
   padding: 1.4rem;
   margin: auto;
-  flex-shrink: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   flex-basis: min(50ch, 50%);
 }
+.description * {
+  flex-grow: 1;
+}
 .description h2 {
+  width: 100%;
+  margin-bottom: 0;
+  text-align: left;
   text-transform: uppercase;
+}
+.btn-download {
+  background-color: hsl(0, 0%, 45%);
+  padding: 1em;
+  text-decoration: none;
+  margin-top: 10px;
+  outline: solid 2px black;
+  box-shadow: inset -2px -4px #0006, inset 2px 2px #fff7;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px #000a;
+  position: relative;
+}
+.btn-download:hover,
+.btn-download:focus {
+  background-color: rgba(100, 100, 255, 0.45);
+  text-shadow: 2px 2px #202013cc;
+  color: #ffffa0;
 }
 .img-desc {
   height: 70%;
@@ -112,6 +133,7 @@ ul.nav-horizontal {
   display: grid;
   place-items: center;
 }
+
 .img-desc img {
   box-shadow: 0px 2px 10px rgb(0, 0, 0, 0.3);
   height: 100%;
@@ -131,6 +153,7 @@ ul.nav-horizontal {
   padding: 1rem;
   max-width: 35ch;
   margin: auto;
+  flex-basis: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,7 +163,7 @@ ul.nav-horizontal {
   height: 7em;
   border-radius: 50%;
 }
-.item h4 {
+.item h3 {
   text-transform: capitalize;
   font-weight: 700;
 }
@@ -148,4 +171,14 @@ ul.nav-horizontal {
   margin-top: 0;
   padding-top: 0;
   text-align: center;
+}
+@media screen and (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 540px) {
+  .img-desc {
+    padding-right: 0;
+  }
 }
