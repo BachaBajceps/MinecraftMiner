@@ -9,7 +9,9 @@
 body {
   margin: 0px;
   padding: 0px;
-  font-family: "Minecraftia", sans-serif;
+}
+body {
+  font-family: "Minecraftia", Arial, sans-serif;
   background-color: rgb(255, 255, 255);
   position: relative;
   font-size: 1.2em;
@@ -17,26 +19,35 @@ body {
 * {
   box-sizing: border-box;
 }
+/*navbar*/
 nav {
-  padding: 0.5rem;
   background-color: rgb(255, 255, 255);
   width: 100%;
+  height: 3em;
 }
-ul.nav-horizontal {
+.nav-link {
+  text-decoration: none;
+  color: rgb(39, 39, 39);
+}
+#menuToggle {
+  display: none;
+}
+ul.nav-list {
+  padding-top: 0.5em;
+  height: 100%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   margin-top: 0px;
   font-size: 1.2rem;
 }
-.nav-horizontal li {
+.nav-list li {
   list-style: none;
   display: inline;
   margin-right: 1.5em;
 }
-.nav-horizontal li img {
-  height: 2em;
-}
-.nav-link {
-  color: rgb(39, 39, 39);
-  text-decoration: none;
+.nav-list li .nav-link {
   padding: 0.7rem;
   position: relative;
 }
@@ -44,7 +55,7 @@ ul.nav-horizontal {
 .nav-link:focus {
   color: black;
 }
-.nav-link::after {
+.nav-list li .nav-link::after {
   content: "";
   position: absolute;
   left: 0;
@@ -56,12 +67,35 @@ ul.nav-horizontal {
   transform-origin: right;
   transition: transform 200ms ease-in;
 }
-.nav-link:hover::after,
-.nav-link:focus::after {
+.nav-list li .nav-link:hover::after,
+.nav-list li .nav-link:focus::after {
   transform: scaleX(1);
   transform-origin: left;
 }
-
+/*vertical nav*/
+.navbar-toggle {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  float: right;
+  margin: 0.5em;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.icon-bar {
+  display: block;
+  width: 25px;
+  height: 4px;
+  margin: 2px;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
+  background-color: black;
+}
+/*main*/
 #start-page {
   display: flex;
   height: auto;
@@ -141,6 +175,7 @@ ul.nav-horizontal {
 #functions {
   background-color: rgb(255, 255, 255);
   padding-top: 3em;
+  color: rgb(22, 22, 22);
 }
 .container {
   margin-left: 2rem;
@@ -172,13 +207,121 @@ ul.nav-horizontal {
   padding-top: 0;
   text-align: center;
 }
+
+/* about us */
+#about-main {
+  background-color: hsl(0, 0%, 90%);
+  height: fit-content;
+  width: 100%;
+  padding: 2em 0;
+  display: grid;
+  place-items: center;
+}
+.about-us-card {
+  height: min(90%, fit-content);
+  width: 90%;
+  max-width: 80ch;
+  padding: 3em 3em;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.5);
+  background-color: hsl(0, 0%, 100%);
+  color: rgb(20, 20, 20);
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.about-us-card h1 {
+  margin: 0px;
+  text-align: center;
+}
+.about-us-card p:nth-child(3) {
+  color: rgb(51, 51, 51);
+  text-align: center;
+  margin-top: 0;
+}
+.developer-pic {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.opis {
+  display: flex;
+  padding-left: 1em;
+  flex-direction: column;
+  justify-content: center;
+}
+.opis p {
+  margin-top: 0;
+}
+.opis a {
+  margin-top: 0;
+  text-decoration: none;
+  color: currentColor;
+}
+.opis a:hover {
+  filter: brightness(10);
+  transition: filter 300ms ease-in-out;
+}
+.opis h2 {
+  margin-bottom: 0.125em;
+}
+.profile {
+  border-radius: 50%;
+  height: 7em;
+  width: 7em;
+}
 @media screen and (max-width: 800px) {
   .container {
     flex-direction: column;
   }
 }
+@media screen and (max-width: 600px) {
+  .navbar-toggle {
+    display: flex;
+  }
+  nav {
+    display: flow-root;
+    height: fit-content;
+    padding-top: 0.5em;
+  }
+  .nav-list li {
+    display: none;
+  }
+  .nav-list li:first-child {
+    display: block;
+    margin-right: 0;
+    flex-grow: 1;
+  }
+  #menuToggle:checked ~ ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  #menuToggle:checked ~ ul li {
+    display: block;
+    padding: 1em;
+    height: 3em;
+    width: 100%;
+    background-color: white;
+  }
+  #menuToggle:checked ~ ul li a {
+    padding: 0.5em 2em;
+  }
+}
 @media screen and (max-width: 540px) {
   .img-desc {
     padding-right: 0;
+  }
+  #about-main {
+    padding-left: 0em;
+  }
+  .about-us {
+    padding: 0em 2em;
   }
 }
